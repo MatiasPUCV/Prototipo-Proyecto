@@ -1,4 +1,4 @@
-#include "render_window.h"
+#include "graphics/render_window.h"
 
 #include <stdio.h>
 #include <SDL_image.h>
@@ -22,7 +22,6 @@ void RenderWindow::close() {
     this->~RenderWindow();
 }
 
-
 void RenderWindow::display() {
     SDL_RenderPresent(this->renderer);
 }
@@ -35,9 +34,13 @@ void RenderWindow::clear() {
 Texture* RenderWindow::load_texture(const char* filename) {
     Texture* texture = IMG_LoadTexture(get_renderer(), filename);
 
-    if (texture == NULL)
+    if (texture == NULL) {
         printf("Error al cargar textura. %s", SDL_GetError());
+    }
 
     return texture;
 }
 
+void RenderWindow::draw(const Drawable& drawable) const {
+    drawable.draw(this);
+}

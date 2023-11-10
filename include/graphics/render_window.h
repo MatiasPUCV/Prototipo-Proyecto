@@ -2,13 +2,9 @@
 #define RENDER_WINDOW_H
 
 #include <SDL2/SDL.h>
-#include "graphics/texture.h"
 
 class RenderWindow {
-
 public:
-
-    friend Drawable;
 
     RenderWindow(const char* title, int width, int height);
     ~RenderWindow();
@@ -25,13 +21,8 @@ public:
     /* Limpia un fotograma */
     void clear();
 
-    Texture* load_texture(const char* filename);
-    SDL_Renderer* get_renderer() const { return this->renderer; }
+    /* Dibuja un objeto */
 
-private:
-
-
-    SDL_Renderer* renderer;
     SDL_Window* window;
 
     bool is_closed;
